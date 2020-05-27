@@ -1,0 +1,23 @@
+from django.shortcuts import render
+from rest_framework import viewsets
+from .models import *
+from .serializers import *
+from django.http import HttpResponse
+
+# Create your views here.
+
+
+class MCQQuestions(viewsets.ModelViewSet):
+	queryset = QuestionMCQ.objects.all()
+	serializer_class = QuestionMCQSerializer
+
+	def post(self,request,*args,**kwargs):
+		statement = request.data['statement']
+		option1 = request.data['option1']
+		option2 = request.data['option2']
+		option3 = request.data['option3']
+		option4 = request.data['option4']
+		answer = request.data['answer']
+		QuestionMCQ.objects.create(statement=statement,option1=option1,option2=option2,
+								   option3=option3,option4=option4,answer=answer)
+		return HttpResponse({'message':'Registered Successfully'},status=200)
