@@ -1,0 +1,11 @@
+<div class="container pt-5 text-center" *ngIf="!user">
+	<p class="lead">You are not currently logged in. Please SignIn/Register</p>
+</div>
+
+<div class="container text-center pt-5">
+	<div *ngIf="user">
+		<img *ngIf="user.image!=null" src="{{user.image}}" class="avatar">
+		<p class="lead">{{user.name}}</p>
+		<p class="lead">{{user.email}}</p>
+	</div>
+</div>

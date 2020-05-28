@@ -1,5 +1,6 @@
 import { Component, OnInit,ViewChild,ElementRef } from '@angular/core';
 import {UserdataService} from '../services/userdata.service';
+import {PostService} from '../services/post.service';
 import{Router,ActivatedRoute} from '@angular/router';
 
 @Component({
@@ -10,10 +11,14 @@ import{Router,ActivatedRoute} from '@angular/router';
 export class SigninComponent implements OnInit {
   myemail="";
   mypassword="";
-  	auth2: any;
+  auth2: any;
+  error=false;
+  host = this.post.getHost();
+
   constructor(private ud :UserdataService
   			 ,private router:Router
-  			 ,private route:ActivatedRoute) { }
+  			 ,private route:ActivatedRoute
+  			 ,private post:PostService) { }
 
   @ViewChild('loginRef', {static: true }) loginElement: ElementRef;
     ngOnInit(){
@@ -21,7 +26,25 @@ export class SigninComponent implements OnInit {
 	}
 
   onSubmit(){
-  	console.log("form submitetd");
+  	const formData = new FormData();
+  	formData.append('email',this.myemail);
+  	formData.append('password',this.mypassword);
+  	this.post.create(this.host+'/login/',formData)
+  			 .subscribe(
+  			 	(response)=>{
+  			 		console.log(response)
+  					if(response['response']=='fail'){
+  						this.error=true;
+  						return;
+  					}
+  			 		this.ud.setUser(response[0]['name'],response[0]['email'],response[0]['profilepicture']);
+  			 		this.router.navigate(['/']);
+  			 	},
+  			 	(err)=>{
+  			 		this.error=true
+  			 	}
+  			 )
+
   }
 
 

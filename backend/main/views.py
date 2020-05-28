@@ -3,6 +3,8 @@ from rest_framework import viewsets
 from .models import *
 from .serializers import *
 from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.http.response import JsonResponse
 
 # Create your views here.
 
@@ -32,15 +34,43 @@ class IntegerQuestion(viewsets.ModelViewSet):
 		answer = request.data['answer']
 		IntegerQuestion.objects.create(statement=statement,answer=answer)
 
-class User(viewsets.ModelViewSet):
+class UserClass(viewsets.ModelViewSet):
 	queryset = User.objects.all()
 	serializer_class = UserSerializer
 
 	def post(self,request,*args,**kwargs):
-		try:
-			name = request.data['name']
-			email = request.data['email']
-			password = request.data['password']
-			IntegerQuestion.objects.create(name=name,email=email,password=password)
-		except:
+		name = request.data['name']
+		email = request.data['email']
+		password = request.data['password']
+		profilepicture = request.data['profilepicture']
+		IntegerQuestion.objects.create(name=name,email=email,password=password,profilepicture=profilepicture)
+
+
+
+@csrf_exempt
+def LoginView(request):
+	if request.method=='POST':
+		profiles = User.objects.all()
+		email = request.POST['email']
+		password = request.POST['password']
+		print(email,password)
+		if email is not None and password is not None:
+			profiles = profiles.filter(email=email,password=password)
+		
+		profile_serializer = UserSerializer(profiles,many=True)
+		print(profile_serializer)
+		if(len(profiles)==1):
+			return JsonResponse(profile_serializer.data,safe=False)
+		else:
 			return JsonResponse({"response":"fail"})
+
+@csrf_exempt
+def CheckUser(request):
+	print(request)
+	email = request.POST['email']
+	users = User.objects.all().filter(email = email)
+	if(len(users)!=0):
+		return JsonResponse({"response":"fail"})
+	else:
+		return JsonResponse({"response":"pass"})
+

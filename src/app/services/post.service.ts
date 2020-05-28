@@ -10,11 +10,15 @@ export class PostService {
   
 
   constructor(private httpClient:HttpClient) {}
-  host = 'http://localhost:8000'
+  host = 'http://localhost:8000';
 
   private url = this.host+'/login/';
 
     create(url,post){
       return this.httpClient.post<any>(url,post);
+    }
+
+    getHost(){
+    	return this.host;
     }
 }

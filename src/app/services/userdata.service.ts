@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {User} from './user-interface';
+import {PostService} from './post.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,11 +9,17 @@ export class UserdataService {
 
   user:User;
   signedin=false;
-  constructor() { }
+  constructor(private ps:PostService) { }
 
 
   setUser(name:string,email:string,image:string){
-  	this.user = {name:name,email:email,image:image};
+  	let imagePath;
+  	if(image!=null)
+  		imagePath = this.ps.getHost()+image;
+  	else
+  		imagePath=null;
+
+  	this.user = {name:name,email:email,image:imagePath};
   	localStorage.setItem('user',JSON.stringify(this.user));
   }
 
