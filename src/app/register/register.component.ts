@@ -4,6 +4,8 @@ import {UserdataService} from '../services/userdata.service';
 import {Router,ActivatedRoute} from '@angular/router';
 import {Observable} from 'rxjs';
 
+var sha1 = require('sha1');
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -66,7 +68,7 @@ export class RegisterComponent implements OnInit {
 	sendData(){
 		const formData = new FormData();
 		formData.append('email',this.email);
-		formData.append('password',this.password);
+		formData.append('password',sha1(this.password));
 		formData.append('name',this.name);
 		try{
 			formData.append('profilepicture',this.fileToUpload,this.fileToUpload.name);

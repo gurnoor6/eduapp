@@ -22,7 +22,6 @@ class MCQQuestions(viewsets.ModelViewSet):
 		answer = request.data['answer']
 		QuestionMCQ.objects.create(statement=statement,option1=option1,option2=option2,
 								   option3=option3,option4=option4,answer=answer)
-		return HttpResponse({'message':'Registered Successfully'},status=200)
 
 
 class IntegerQuestion(viewsets.ModelViewSet):
@@ -54,12 +53,11 @@ def LoginView(request):
 		profiles = User.objects.all()
 		email = request.POST['email']
 		password = request.POST['password']
-		print(email,password)
+		print(password)
 		if email is not None and password is not None:
 			profiles = profiles.filter(email=email,password=password)
 		
 		profile_serializer = UserSerializer(profiles,many=True)
-		print(profile_serializer)
 		if(len(profiles)==1):
 			return JsonResponse(profile_serializer.data,safe=False)
 		else:
@@ -69,7 +67,6 @@ def LoginView(request):
 # check if a user of same email exists
 @csrf_exempt
 def CheckUser(request):
-	print(request)
 	email = request.POST['email']
 	users = User.objects.all().filter(email = email)
 	if(len(users)!=0):

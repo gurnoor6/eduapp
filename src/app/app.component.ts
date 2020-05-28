@@ -2,6 +2,8 @@ import { Component,AfterViewInit,ViewChild,OnInit,ElementRef } from '@angular/co
 import {UserdataService} from './services/userdata.service';
 import{User} from './services/user-interface';
 
+var sha1 = require('sha1');
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

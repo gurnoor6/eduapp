@@ -7,6 +7,7 @@ import { SigninComponent } from './signin/signin.component';
 import { RegisterComponent } from './register/register.component';
 import {HttpClientModule} from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
+import { Md5 } from 'ts-md5/dist/md5';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,7 @@ import { HomeComponent } from './home/home.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [Md5],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -3,6 +3,8 @@ import {UserdataService} from '../services/userdata.service';
 import {PostService} from '../services/post.service';
 import{Router,ActivatedRoute} from '@angular/router';
 
+var sha1 = require('sha1');
+
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
@@ -38,7 +40,7 @@ export class SigninComponent implements OnInit {
   onSubmit(){
   	const formData = new FormData();
   	formData.append('email',this.myemail);
-  	formData.append('password',this.mypassword);
+  	formData.append('password',sha1(this.mypassword));
   	this.post.create(this.host+'/login/',formData)
   			 .subscribe(
   			 	(response)=>{
