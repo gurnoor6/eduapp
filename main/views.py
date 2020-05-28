@@ -21,3 +21,13 @@ class MCQQuestions(viewsets.ModelViewSet):
 		QuestionMCQ.objects.create(statement=statement,option1=option1,option2=option2,
 								   option3=option3,option4=option4,answer=answer)
 		return HttpResponse({'message':'Registered Successfully'},status=200)
+
+
+class IntegerQuestion(viewsets.ModelViewSet):
+	queryset = IntegerQuestion.objects.all()
+	serializer_class = IntegerQuestionSerializer
+
+	def post(self,request,*args,**kwargs):
+		statement = request.data['statement']
+		answer = request.data['answer']
+		IntegerQuestion.objects.create(statement=statement,answer=answer)
