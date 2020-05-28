@@ -6,19 +6,18 @@ import {HttpClient} from '@angular/common/http';
 })
 
 export class PostService {
+	constructor(private httpClient:HttpClient) {}
 
-  
+	//defined like this because when we host, we'll need to change this
+	host = 'http://localhost:8000';
 
-  constructor(private httpClient:HttpClient) {}
-  host = 'http://localhost:8000';
+	//create a post request to any url
+	create(url,post){
+	  return this.httpClient.post<any>(url,post);
+	}
 
-  private url = this.host+'/login/';
+	getHost(){
+		return this.host;
+	}
 
-    create(url,post){
-      return this.httpClient.post<any>(url,post);
-    }
-
-    getHost(){
-    	return this.host;
-    }
 }

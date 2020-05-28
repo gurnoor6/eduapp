@@ -12,6 +12,7 @@ import {Observable} from 'rxjs';
 export class RegisterComponent implements OnInit {
 
 
+	//Variables for form fields
 	name="";
 	email="";
 	password="";
@@ -25,6 +26,7 @@ export class RegisterComponent implements OnInit {
 	duplicate = false;
 
 
+	//handle image file
 	handleFileInput(files:FileList){
 		this.fileToUpload = files.item(0);
 	}
@@ -38,6 +40,7 @@ export class RegisterComponent implements OnInit {
 		
 	}
 
+	//validate the data entered for registeration
 	validate(){
 		var email = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
 		this.emailValidation = email.test(this.email);
@@ -51,6 +54,7 @@ export class RegisterComponent implements OnInit {
 		return false;
 	}
 
+
 	//Observable does not work. The other expression is executed before the result is given
 	checkDuplicate():Promise<any>{
 		const userEmail = new FormData();
@@ -58,18 +62,7 @@ export class RegisterComponent implements OnInit {
 		return this.service.create(this.service.getHost()+"/checkuser/",userEmail).toPromise();
 	}
 
-	// async onSubmit(){
-	// 	if(!this.validate())
-	// 		return;
-
-	// 	//Check if there is an existing user with same email. 
-	// 	let result = await this.checkDuplicate();	
-	// 	console.log(result)
-	// 	console.log(result)
-	// 	if(result){
-	
-	// }
-
+	//create a user after performing validations
 	sendData(){
 		const formData = new FormData();
 		formData.append('email',this.email);
@@ -91,6 +84,7 @@ export class RegisterComponent implements OnInit {
 		
 	}
 
+	//submit form data 
 	async onSubmit(){
 		if(!this.validate())
 			return;
@@ -105,8 +99,6 @@ export class RegisterComponent implements OnInit {
 
 		if(!this.duplicate)
 			this.sendData();
-
-
 	}
 
 

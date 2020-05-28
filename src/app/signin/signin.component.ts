@@ -9,10 +9,18 @@ import{Router,ActivatedRoute} from '@angular/router';
   styleUrls: ['./signin.component.css']
 })
 export class SigninComponent implements OnInit {
+  
+  //form data variables
   myemail="";
   mypassword="";
+
+  //google login variable
   auth2: any;
+
+  //If a server error occurs, shows an error message
   error=false;
+
+  //get the name of hosted site
   host = this.post.getHost();
 
   constructor(private ud :UserdataService
@@ -25,6 +33,8 @@ export class SigninComponent implements OnInit {
    		this.googleSDK();
 	}
 
+
+  //used to sign in for the user
   onSubmit(){
   	const formData = new FormData();
   	formData.append('email',this.myemail);
@@ -37,15 +47,18 @@ export class SigninComponent implements OnInit {
   						this.error=true;
   						return;
   					}
+  					//set user in browser storage
   			 		this.ud.setUser(response[0]['name'],response[0]['email'],response[0]['profilepicture']);
+  			 		
+  			 		//open homepage after successful signin 
   			 		this.router.navigate(['/']);
   			 	},
   			 	(err)=>{
   			 		this.error=true
   			 	}
   			 )
-
   }
+
 
 
   //Google Login Stuff

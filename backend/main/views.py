@@ -47,6 +47,7 @@ class UserClass(viewsets.ModelViewSet):
 
 
 
+# Log in the user by checking his credentials
 @csrf_exempt
 def LoginView(request):
 	if request.method=='POST':
@@ -64,6 +65,8 @@ def LoginView(request):
 		else:
 			return JsonResponse({"response":"fail"})
 
+
+# check if a user of same email exists
 @csrf_exempt
 def CheckUser(request):
 	print(request)

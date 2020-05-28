@@ -16,6 +16,7 @@ signedIn;
 constructor(private ud:UserdataService){}
 
 ngOnInit(){
+	//the user may logout/login at any time. so we need to keep track of it continuously
 	setInterval(()=>this.getUser());
 }
 
