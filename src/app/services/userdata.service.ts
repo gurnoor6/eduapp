@@ -14,10 +14,12 @@ export class UserdataService {
 
   setUser(name:string,email:string,image:string){
   	let imagePath;
-  	if(image!=null)
+  	if(image!=null && !image.includes("http"))
   		imagePath = this.ps.getHost()+image;
-  	else
+  	else if(image==null)
   		imagePath=null;
+  	else
+  		imagePath = image;
 
   	this.user = {name:name,email:email,image:imagePath};
   	localStorage.setItem('user',JSON.stringify(this.user));
