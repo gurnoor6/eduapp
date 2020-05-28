@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "eduapp"
+    }
+  },
+  "defaultProject": "eduapp",
+  "cli": {
+    "analytics": false
+  }
 }

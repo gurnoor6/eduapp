@@ -5,6 +5,7 @@ from . import views
 router = routers.DefaultRouter()
 router.register('mcqquestions',views.MCQQuestions)
 router.register('integerquestions',views.IntegerQuestion)
+router.register('users',views.User)
 
 urlpatterns = [
     path('', include(router.urls)),

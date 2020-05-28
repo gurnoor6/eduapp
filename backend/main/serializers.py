@@ -12,3 +12,8 @@ class IntegerQuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = IntegerQuestion
         fields = ['statement','answer']
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['name','email','password']

@@ -31,3 +31,16 @@ class IntegerQuestion(viewsets.ModelViewSet):
 		statement = request.data['statement']
 		answer = request.data['answer']
 		IntegerQuestion.objects.create(statement=statement,answer=answer)
+
+class User(viewsets.ModelViewSet):
+	queryset = User.objects.all()
+	serializer_class = UserSerializer
+
+	def post(self,request,*args,**kwargs):
+		try:
+			name = request.data['name']
+			email = request.data['email']
+			password = request.data['password']
+			IntegerQuestion.objects.create(name=name,email=email,password=password)
+		except:
+			return JsonResponse({"response":"fail"})
