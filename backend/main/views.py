@@ -67,10 +67,15 @@ def LoginView(request):
 # check if a user of same email exists
 @csrf_exempt
 def CheckUser(request):
-	email = request.POST['email']
-	users = User.objects.all().filter(email = email)
-	if(len(users)!=0):
-		return JsonResponse({"response":"fail"})
-	else:
-		return JsonResponse({"response":"pass"})
+	if request.method=='POST':
+		email = request.POST['email']
+		users = User.objects.all().filter(email = email)
+		if(len(users)!=0):
+			return JsonResponse({"response":"fail"})
+		else:
+			return JsonResponse({"response":"pass"})
 
+	if request.method=='GET':
+		profiles = User.objects.all()
+		profile_serializer = UserSerializer(profiles,many=True)
+		return JsonResponse(profile_serializer.data,safe=False)

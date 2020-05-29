@@ -20,6 +20,7 @@ export class RegisterComponent implements OnInit {
 	password="";
 	error=false;
 	fileToUpload :File=null;
+	submitted = false;
 
 	//Validation variables 
 	emailValidation=true;
@@ -76,7 +77,8 @@ export class RegisterComponent implements OnInit {
 			
 		this.service.create(this.service.getHost()+'/users/',formData)
 			.subscribe(response=>{
-						this.router.navigate(['/']);
+						this.submitted = true;
+						// this.router.navigate(['/']);
 					},
 					error=>{
 						console.log(error);

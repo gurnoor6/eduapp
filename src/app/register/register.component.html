@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row justify-content-center">
-    <form #registrationForm="ngForm" novalidate (ngSubmit)="onSubmit()">
+    <form #registrationForm="ngForm" novalidate (ngSubmit)="onSubmit()" *ngIf="!submitted">
         <div class="form-group">
           <label for="name">Name</label>
           <input type="text" class="form-control" id="name" name="name" placeholder="Name" [(ngModel)]="name">
@@ -25,5 +25,7 @@
         <button type="submit" class="btn btn-dark">Register</button>
         <p class="lead text-danger" *ngIf="error">Some Error Occured. Please Try later.</p>
     </form>
+
+    <p class="lead text-success mt-5" *ngIf="submitted"> You Have successfully registered. Please Sign In Now!</p>
   </div>
 </div>
