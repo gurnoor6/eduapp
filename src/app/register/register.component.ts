@@ -18,6 +18,7 @@ export class RegisterComponent implements OnInit {
 	name="";
 	email="";
 	password="";
+	confirmpassword="";
 	error=false;
 	fileToUpload :File=null;
 	submitted = false;
@@ -27,6 +28,7 @@ export class RegisterComponent implements OnInit {
 	passwordValidation=true;
 	nameValidation = true;
 	duplicate = false;
+	passwordMatch=true;
 
 
 	//handle image file
@@ -52,7 +54,10 @@ export class RegisterComponent implements OnInit {
 		if(this.name.length==0)
 			this.nameValidation=false;
 
-		if(this.emailValidation && this.passwordValidation && this.nameValidation)
+		if(this.password!=this.confirmpassword)
+			this.passwordMatch=false;
+
+		if(this.emailValidation && this.passwordValidation && this.nameValidation && this.passwordMatch)
 			return true;
 		return false;
 	}

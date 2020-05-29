@@ -19,6 +19,11 @@
           <p class="small text-danger" *ngIf="!passwordValidation">Your password must contain at least 8 characters</p>
         </div>
         <div class="form-group">
+          <label for="confirmpassword">Password</label>
+          <input type="password" class="form-control" id="confirmpassword" name="confirmpassword" placeholder="Confirm Password" [(ngModel)]="confirmpassword">
+          <p class="small text-danger" *ngIf="!passwordMatch && passwordValidation">Your Password and Confirmation Passwords do not match.</p>
+        </div>
+        <div class="form-group">
           <label for="image">Choose Profile Picture (Not Necessary)</label>
           <input type="file" class="form-control" id="image" (change)="handleFileInput($event.target.files)">
         </div>
