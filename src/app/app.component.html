@@ -21,26 +21,26 @@
       </div>
     </li>
 
-    <li class="nav-item dropdown">
+    <li class="nav-item dropdown" *ngIf="signedIn">
       <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-        Tab 2
+        {{user.name}}
       </a>
       <div class="dropdown-menu">
-        <a class="dropdown-item" href="#">Link 1</a>
-        <a class="dropdown-item" href="#">Link 2</a>
-        <a class="dropdown-item" href="#">Link 3</a>
+        <a class="dropdown-item" href="/">{{user.name}} (Profile)</a>
+        <a class="dropdown-item" href="#">Dashboard</a>
+        <a class="dropdown-item" (click)="logOut()">Log Out</a>
       </div>
     </li>
 
    	 <li class="nav-item">
         <a class="nav-link" href="#">Tab 3</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Tab 4</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Tab 5</a>
-      </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Tab 4</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Tab 5</a>
+    </li>
 
       <li class="nav-item" *ngIf="!signedIn">
         <a class="nav-link" href="signin">Sign In</a>
@@ -50,13 +50,13 @@
         <a class="nav-link" href="register">Register</a>
       </li>
 
-      <li class="nav-item" *ngIf="signedIn">
+     <!--  <li class="nav-item" *ngIf="signedIn">
         <a class="nav-link" href="/">{{user.name}}</a>
       </li>
 
       <li class="nav-item" *ngIf="signedIn">
         <a class="nav-link" (click)="logOut()">Log Out</a>
-      </li>
+      </li> -->
 
     </ul>
   </div>
